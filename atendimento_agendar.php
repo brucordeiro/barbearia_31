@@ -34,6 +34,25 @@ and open the template in the editor.
 
                     <li>Selecione o seu serviço <br />
                         <select name="selectServico" class="input">
+                            <?php 
+                            //PASSO 1: Incluir as definicoes da base de dados
+                            include "conexao_bd.php";
+                            //PASSO 2: Montar o comando SQL para listar os servicos
+                            $sql = "SELECT * FROM servico ORDER BY descicao";
+                            //PASSO 3: Executar o SQL e guardar o resultado 
+                            //em uma variável
+                            $resultado = retornarDados($sql);
+                            while($linha = mysqli_fetch_assoc ($resultado))
+                            {
+                            ?>
+                                <option> 
+                                    <?php echo $linha["descicao"]; ?>
+                                     R$
+                                     <?php echo $linha ["preco"]; ?>
+                                </option>
+                            <?php
+                            }
+                            ?>
                             <option></option>
                         </select>
                     </li>
